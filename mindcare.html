@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="UTF-8">
+<title>MindCare</title>
+
+<style>
+
+body{
+font-family: Arial;
+background:#e8f6f3;
+text-align:center;
+margin:0;
+}
+
+header{
+background:#5bbfc4;
+color:white;
+padding:30px;
+}
+
+nav{
+background:#4aa8ad;
+padding:15px;
+}
+
+nav a{
+color:white;
+margin:20px;
+text-decoration:none;
+font-weight:bold;
+font-size:18px;
+}
+
+section{
+padding:50px;
+}
+
+.box{
+background:white;
+margin:20px auto;
+padding:25px;
+width:60%;
+border-radius:10px;
+box-shadow:0 0 10px rgba(0,0,0,0.1);
+}
+
+button{
+padding:10px 20px;
+margin-top:10px;
+background:#5bbfc4;
+border:none;
+color:white;
+font-size:16px;
+border-radius:5px;
+cursor:pointer;
+}
+
+textarea{
+width:80%;
+height:120px;
+}
+
+#timer{
+font-size:40px;
+margin:20px;
+}
+
+footer{
+background:#4aa8ad;
+color:white;
+padding:10px;
+margin-top:40px;
+}
+
+</style>
+</head>
+
+<body>
+
+<header>
+<h1>MindCare</h1>
+<p>App per il benessere mentale</p>
+</header>
+
+<nav>
+<a href="#stress">Cos'è lo stress</a>
+<a href="#respirazione">Respirazione</a>
+<a href="#suoni">Suoni rilassanti</a>
+<a href="#diario">Diario emozioni</a>
+</nav>
+
+<section id="stress">
+<div class="box">
+
+<h2>Cos'è lo stress</h2>
+
+<p>
+Lo stress è una reazione naturale del nostro corpo quando affrontiamo
+situazioni difficili o impegnative. Può essere causato da molti fattori
+come lo studio, gli esami, i problemi personali o le preoccupazioni
+della vita quotidiana.
+</p>
+
+<p>
+Quando siamo stressati il nostro corpo produce ormoni che ci preparano
+ad affrontare una situazione difficile. Questo può farci sentire più
+attenti e pronti ad agire. Tuttavia, se lo stress dura troppo tempo,
+può diventare negativo e influenzare il nostro benessere mentale
+e fisico.
+</p>
+
+<p>
+Alcuni segnali dello stress possono essere:
+</p>
+
+<p>
+• difficoltà a concentrarsi<br>
+• sentirsi stanchi o nervosi<br>
+• mal di testa o tensione muscolare<br>
+• problemi a dormire
+</p>
+
+<p>
+Per questo è importante imparare tecniche di rilassamento,
+respirare profondamente e prendersi delle pause durante la giornata.
+Piccoli momenti di calma possono aiutare molto a migliorare
+il benessere mentale.
+</p>
+
+</div>
+</section>
+
+<section id="respirazione">
+<div class="box">
+
+<h2>Tecnica di respirazione</h2>
+
+<p>
+Segui questo esercizio:
+</p>
+
+<p>
+Inspira per 4 secondi<br>
+Trattieni per 4 secondi<br>
+Espira per 4 secondi
+</p>
+
+<div id="timer">0</div>
+
+<button onclick="startTimer()">Inizia respirazione</button>
+
+</div>
+</section>
+
+<section id="suoni">
+<div class="box">
+
+<h2>Suoni rilassanti</h2>
+
+<p>Ascolta un suono calmo per rilassarti:</p>
+
+<audio controls>
+<source src="https://cdn.pixabay.com/audio/2022/03/15/audio_6f6d7db7f3.mp3" type="audio/mpeg">
+</audio>
+
+</div>
+</section>
+
+<section id="diario">
+<div class="box">
+
+<h2>Diario delle emozioni</h2>
+
+<p>Scrivi come ti senti oggi:</p>
+
+<textarea id="diarioTesto" placeholder="Scrivi qui le tue emozioni..."></textarea>
+
+<br><br>
+
+<button onclick="salvaDiario()">Salva</button>
+
+<p id="messaggio"></p>
+
+</div>
+</section>
+
+<footer>
+<p>Progetto scolastico MindCare</p>
+</footer>
+
+<script>
+
+function startTimer(){
+
+let tempo = 12;
+let display = document.getElementById("timer");
+
+let conto = setInterval(function(){
+
+display.innerHTML = tempo;
+
+tempo--;
+
+if(tempo < 0){
+clearInterval(conto);
+display.innerHTML = "Esercizio finito";
+}
+
+},1000);
+
+}
+
+function salvaDiario(){
+
+let testo = document.getElementById("diarioTesto").value;
+
+localStorage.setItem("diario", testo);
+
+document.getElementById("messaggio").innerHTML="Emozioni salvate!";
+
+}
+
+window.onload = function(){
+
+let salvato = localStorage.getItem("diario");
+
+if(salvato){
+document.getElementById("diarioTesto").value = salvato;
+}
+
+}
+
+</script>
+
+</body>
+</html>
